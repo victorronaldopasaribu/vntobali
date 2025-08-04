@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Itinerary Honeymoon ke Bali</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .romantic {
+        font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 600;
+    }
+    .active {
+      background-color: #fef3c7;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(252, 211, 77, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(252, 211, 77, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(252, 211, 77, 0); }
+    }
+  </style>
+</head>
+<body class="bg-pink-50 text-gray-800">
+
+  <header class="text-center py-10 bg-gradient-to-r from-pink-300 to-yellow-100 shadow-md">
+    <h1 class="text-5xl romantic text-pink-700 drop-shadow-lg">Honeymoon ke Bali</h1>
+    <p class="text-lg mt-1 italic">09 – 14 September 2025</p>
+    <div id="countdown" class="text-xl mt-3 font-bold text-amber-700"></div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-6 py-8 space-y-14">
+
+    <!-- Container Itinerary -->
+    <div id="itinerary"></div>
+
+  </main>
+
+  <script>
+    const startDate = new Date("2025-09-09T00:00:00");
+    const endDate = new Date("2025-09-14T23:59:59");
+
+    const itineraryData = {
+      "2025-09-09": {
+        images: [
+          "airport.jpg",
+          "kuta.jpg",
+          "boardwalk.jpg"
+        ],
+        activities: [
+          { time: "14:00", activity: "Tiba di Bandara Ngurah Rai" },
+          { time: "15:00", activity: "Check-in di Hotel (Mega Boutique Resort & Spa)" },
+          { time: "17:00", activity: "Menikmati sunset di Pantai Kuta" },
+          { time: "19:00", activity: "Dinner (Boardwalk Restaurant)" },
+          { time: "21:00", activity: "Kembali ke hotel" },
+          { time: "22:00", activity: "Tidur dan lain-lain" }
+        ]
+      },
+      "2025-09-10": {
+        images: [
+          "nusapenida.jpg",
+          "diamondbeach.jpg",
+          "broken.jpg"
+        ],
+        activities: [
+          { time: "05:00", activity: "Sarapan di hotel dan persiapan ke Nusa Penida" },
+          { time: "06:30", activity: "Tiba di Pantai Sanur untuk keberangkatan" },
+          { time: "07:00", activity: "Nusa Penida (Open Trip)" },
+          { time: "18:00", activity: "Tiba di Pantai Sanur" },
+          { time: "18:00", activity: "Tiba di Pantai Sanur" },
+          { time: "19:00", activity: "Dinner (Warung Kecil)" },
+          { time: "20:00", activity: "Kembali ke hotel + SPA" }
+        ]
+      },
+      "2025-09-11": {
+        images: [
+          "doublesix.jpg",
+          "uluwatu.jpg",
+          "jimbaran.jpg"
+        ],
+        activities: [
+          { time: "06:30", activity: "Berenang di Pool Hotel" },
+          { time: "07:30", activity: "Sarapan di hotel" },
+          { time: "11:30", activity: "Makan siang di luar hotel" },
+          { time: "12:30", activity: "Menikmati pantai (Double Six Beach)" },
+          { time: "14:30", activity: "Pura Uluwatu" },
+          { time: "16:30", activity: "Menonton pertunjukkan tari kecak" },
+          { time: "19:00", activity: "Dinner (Jimbaran Seafood)" },
+          { time: "21:30", activity: "Kembali ke hotel" }
+        ]
+      },
+      "2025-09-12": {
+        images: [
+          "tanahlot.jpg",
+          "gwk.jpg",
+          "dreamland.jpg"
+        ],
+        activities: [
+          { time: "07:00", activity: "Sarapan di hotel" },
+          { time: "09:30", activity: "Tanah Lot" },
+          { time: "11:30", activity: "Makan siang di Cafe sekitar Seminyak" },
+          { time: "14:00", activity: "Garuda Wisnu Kencana" },
+          { time: "17:00", activity: "Menikmati sunset di Dreamland" },
+          { time: "19:00", activity: "Dinner (Warung Cantina)" },
+          { time: "20:00", activity: "Kembali ke hotel" }
+        ]
+      },
+      "2025-09-13": {
+        images: [
+          "monkey.jpg",
+          "tegalang.jpg",
+          "pasarseni.jpg"
+        ],
+        activities: [
+          { time: "07:00", activity: "Sarapan di hotel" },
+          { time: "08:30", activity: "Monkey Forest" },
+          { time: "10:00", activity: "Tegalalang Rice Terrace" },
+          { time: "11:30", activity: "Makan siang di Cafe" },
+          { time: "13:00", activity: "Pasar Seni" },
+          { time: "14:30", activity: "Beli oleh-oleh" },
+          { time: "16:30", activity: "Freetime" },
+          { time: "19:00", activity: "Dinner di daerah Kuta dan menikmati malam" },
+          { time: "21:30", activity: "Kembali ke hotel" }
+        ]
+      },
+      "2025-09-14": {
+        images: [
+          "hotel.jpg",
+          "hotel2.jpg",
+          "jakarta.jpg"
+        ],
+        activities: [
+          { time: "06:30", activity: "Berenang di Pool Hotel" },
+          { time: "07:00", activity: "Sarapan di Hotel" },
+          { time: "08:00", activity: "Persiapan & checkout" },
+          { time: "09:00", activity: "Bandara Ngurah Rai" },
+          { time: "10:00", activity: "Flight kembali ke rumah 💕" }
+        ]
+      }
+    };
+
+    function updateCountdown() {
+      const now = new Date();
+      const el = document.getElementById("countdown");
+      const diff = startDate - now;
+      if (diff > 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        el.textContent = `H- ${days} hari lagi menuju honeymoon 💑`;
+      } else if (now >= startDate && now <= endDate) {
+        el.textContent = `🌺 Honeymoon sedang berlangsung!`;
+      } else {
+        el.textContent = `💖 Honeymoon telah selesai — kenangan indah abadi!`;
+      }
+    }
+
+    function renderItinerary() {
+      const now = new Date();
+      const container = document.getElementById("itinerary");
+
+      Object.entries(itineraryData).forEach(([dateStr, { images, activities }]) => {
+        const date = new Date(dateStr);
+        const today = now.toDateString() === date.toDateString();
+        const readableDate = date.toLocaleDateString('id-ID', {
+          weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+        });
+
+        const section = document.createElement("section");
+        section.className = "bg-white rounded-2xl shadow-2xl p-6 space-y-4 border border-pink-100";
+
+        section.innerHTML = `
+          <h2 class="text-2xl font-bold text-pink-700">${readableDate}</h2>
+
+          <div class="relative w-full h-72 sm:h-42 md:h-96 overflow-hidden">
+            ${images.map((url, i) => `
+              <img src="${url}" alt="foto hari ${readableDate}"
+                class="absolute w-48 h-32 sm:w-52 sm:h-36 md:w-60 md:h-40 object-cover rounded-xl shadow-md transition-transform duration-300
+                ${i === 0 ? 'rotate-[-6deg] top-2 left-4' : ''}
+                ${i === 1 ? 'rotate-[8deg] top-16 left-32 sm:left-52' : ''}
+                ${i === 2 ? 'rotate-[-3deg] top-6 right-4' : ''}
+                hover:scale-105 hover:rotate-0 z-10">`
+            ).join('')}
+          </div>
+
+          <ul class="mt-4 space-y-2">
+            ${activities.map(({ time, activity }) => {
+              const [h, m] = time.split(":");
+              const actTime = new Date(date);
+              actTime.setHours(h, m);
+              const isActive = today &&
+                now.getHours() === actTime.getHours() &&
+                Math.abs(now.getMinutes() - actTime.getMinutes()) < 30;
+
+              return `<li class="p-3 rounded-md ${isActive ? 'active font-bold text-yellow-800' : 'bg-yellow-50'}">
+                <span class="font-semibold text-gray-700">${time}</span> – ${activity}
+              </li>`;
+            }).join('')}
+          </ul>
+        `;
+
+        container.appendChild(section);
+      });
+    }
+
+    updateCountdown();
+    renderItinerary();
+    setInterval(updateCountdown, 60000);
+  </script>
+</body>
+</html>

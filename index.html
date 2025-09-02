@@ -54,7 +54,7 @@
         ],
         activities: [
           { time: "14:00", activity: "Tiba di Bandara Ngurah Rai" },
-          { time: "15:00", activity: "Check-in di Hotel (Kutabex Beach Front Hotel)" },
+          { time: "15:00", activity: "Check-in di Hotel (Daun Bali Seminyak)" },
           { time: "16:00", activity: "Pengambilan motor" },
           { time: "17:00", activity: "Menikmati sunset di Pantai Kuta" },
           { time: "19:00", activity: "Dinner (Boardwalk Restaurant)" },
@@ -191,10 +191,10 @@
           "jakarta.jpg"
         ],
         activities: [
-          { time: "07:00", activity: "Sarapan di Hotel" },
-          { time: "08:00", activity: "Persiapan & checkout" },
-          { time: "09:00", activity: "Bandara Ngurah Rai" },
-          { time: "10:00", activity: "Flight kembali ke rumah 💕" }
+          { time: "06:00", activity: "Sarapan di Hotel / Luar Hotel" },
+          { time: "07:00", activity: "Persiapan & checkout" },
+          { time: "08:00", activity: "Bandara Ngurah Rai" },
+          { time: "09:40", activity: "Flight kembali ke rumah 💕" }
         ]
       }
     };
@@ -205,7 +205,7 @@
       const diff = startDate - now;
       if (diff > 0) {
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        el.textContent = `H- ${days} hari lagi menuju honeymoon 💑`;
+        el.textContent = ` ${days} hari lagi menuju honeymoon 💑`;
       } else if (now >= startDate && now <= endDate) {
         el.textContent = `🌺 Honeymoon sedang berlangsung!`;
       } else {

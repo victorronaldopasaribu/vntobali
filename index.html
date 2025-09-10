@@ -224,32 +224,36 @@
           weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
         });
 
+        let activeIndex = -1;
+        if (today) {
+          activities.forEach(({ time }, idx) => {
+            const [h, m] = time.split(":");
+            const actTime = new Date(date);
+            actTime.setHours(h, m);
+            if (now >= actTime) {
+              activeIndex = idx;
+            }
+          });
+        }
+
         const section = document.createElement("section");
         section.className = "bg-white rounded-2xl shadow-2xl p-6 space-y-4 border border-pink-100";
 
         section.innerHTML = `
           <h2 class="text-2xl font-bold text-pink-700">${readableDate}</h2>
-
-        <div class="relative w-full h-auto flex sm:block gap-3 sm:h-42 md:h-96 justify-center items-center">
-        ${images.map((url, i) => `
-            <img src="${url}" alt="foto hari ${readableDate}"
-            class="w-24 h-24 sm:absolute sm:w-52 sm:h-36 md:w-60 md:h-40 object-cover rounded-xl shadow-md transition-transform duration-300
-            ${i === 0 ? 'rotate-[-6deg] sm:top-2 sm:left-4' : ''}
-            ${i === 1 ? 'rotate-[8deg] sm:top-16 sm:left-32 sm:left-52' : ''}
-            ${i === 2 ? 'rotate-[-3deg] sm:top-6 sm:right-4' : ''}
-            hover:scale-105 hover:rotate-0 z-10">`
-        ).join('')}
-        </div>
-
+          <div class="relative w-full h-auto flex sm:block gap-3 sm:h-42 md:h-96 justify-center items-center">
+            ${images.map((url, i) => `
+              <img src="${url}" alt="foto hari ${readableDate}"
+              class="w-24 h-24 sm:absolute sm:w-52 sm:h-36 md:w-60 md:h-40 object-cover rounded-xl shadow-md transition-transform duration-300
+              ${i === 0 ? 'rotate-[-6deg] sm:top-2 sm:left-4' : ''}
+              ${i === 1 ? 'rotate-[8deg] sm:top-16 sm:left-52' : ''}
+              ${i === 2 ? 'rotate-[-3deg] sm:top-6 sm:right-4' : ''}
+              hover:scale-105 hover:rotate-0 z-10">`
+            ).join('')}
+          </div>
           <ul class="mt-4 space-y-2">
-            ${activities.map(({ time, activity }) => {
-              const [h, m] = time.split(":");
-              const actTime = new Date(date);
-              actTime.setHours(h, m);
-              const isActive = today &&
-                now.getHours() === actTime.getHours() &&
-                Math.abs(now.getMinutes() - actTime.getMinutes()) < 30;
-
+            ${activities.map(({ time, activity }, idx) => {
+              const isActive = today && idx === activeIndex;
               return `<li class="p-3 rounded-md ${isActive ? 'active font-bold text-yellow-800' : 'bg-yellow-50'}">
                 <span class="font-semibold text-gray-700">${time}</span> – ${activity}
               </li>`;
@@ -267,5 +271,6 @@
   </script>
 </body>
 </html>
+
 
 
